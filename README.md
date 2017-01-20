@@ -3,7 +3,6 @@ Introduction to RPG
 
 ## Todo
 
-* Modules and programs
 * Creating commands for programs
 * Embedded SQL basics
 

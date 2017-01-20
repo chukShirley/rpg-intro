@@ -65,6 +65,8 @@ First, we will need to do the following steps:
 
 You may also do this within Rational Developer for i, but it’s very useful to memorize these commands for when you don’t have the IDE.
 
+It is possible to write all your RPG code in stream files on the IFS. The easiest way to create a stream file is with Rational Developer for i.
+
 ```
 **FREE  
 
@@ -83,6 +85,13 @@ Return;
 ```
 
 Once we have written our code, we are going to use CRTBNDRPG to create our program object. What makes CRTBNDPGM useful is that it just creates a program object – it’s automating the CRTRPGMOD step. Another way we could have created our program object is by using CRTRPGMOD and then CRTPGM over that module. 
+
+CRTBNDRPG does allow you to compile both stream files and source members.
+
+* To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCFILE(MYLIB/QRPGLESRC) SRCMBR(XMPLE1) TEXT('My RPG IV Program')`
+* To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple.rpgle') TEXT('My RPG IV Program')`
+
+Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compild.
 
 You are now going to call your program using `CALL <programname>`, which should then display ‘Hello world’ on your terminal. 
 
@@ -407,3 +416,26 @@ MyOtherDS.SubfieldB = 1337;
 ```
 
 Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE` keyword – you can use it on any data-structure.
+
+## RPG Prototypes
+
+In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure/program interface).
+
+Program interfaces can: 
+
+* Have pass by reference parameters only.
+* The value after `Dcl-PI` must be the program name.
+
+
+```
+**FREE
+
+Dcl-Pi XMPLE1;
+  pName Char(10)
+End-Pi;
+
+Dsply pNams;
+
+*InLR = *On;
+Return;
+```

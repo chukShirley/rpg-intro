@@ -89,11 +89,11 @@ Once we have written our code, we are going to use CRTBNDRPG to create our progr
 CRTBNDRPG does allow you to compile both stream files and source members.
 
 * To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCFILE(MYLIB/QRPGLESRC) SRCMBR(XMPLE1) TEXT('My RPG IV Program')`
-* To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple.rpgle') TEXT('My RPG IV Program')`
+* To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple1.rpgle') TEXT('My RPG IV Program')`
 
 Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compild.
 
-You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/cl/crtbndrpg.htm] for info on CRTBNDPGM.
+You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/cl/crtbndrpg.htm) for info on CRTBNDPGM.
 
 You are now going to call your program using `CALL <programname>`, which should then display ‘Hello world’ on your terminal. 
 
@@ -423,7 +423,7 @@ Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE
 
 In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure interface). 
 
-You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm] for info on procedure interface declaration.
+You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm) for info on procedure interface declaration.
 
 In general, procedure interfaces for programs can: 
 

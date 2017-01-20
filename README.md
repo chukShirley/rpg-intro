@@ -5,6 +5,9 @@ Introduction to RPG
 
 1. IBM i file system and the IFS
 2. IBM i commands
+3. Creating your first RPG program.
+4. RPG Syntax
+5. RPG data-types
 
 
 ## IBM i file system and the IFS 
@@ -84,3 +87,47 @@ Notice how in the last lecture, we used `**FREE` – this is a compiler directiv
 
 In RPG, things like IF, DOW, DOU, SELECT, WHEN, DCL-S, etc are all RPG operations. You will always need a space between the operation code and the next value. For good practice, you should surround expressions with brackets.
 
+```
+//Good practice
+If (2 > 1);
+  Dsply 'True';
+ENDIF;
+
+//Bad practice
+If 2 > 1;
+  Dsply 'True';
+ENDIF; 
+```
+
+Variables are case-insensitive and cannot start with numeric digits (but can contain them). Variables must be defined at the top of your program/procedure It is good practice to start variables in the global scope with a lowercase ‘g’ – variables in a local scope to start with a lowercase ‘l’.
+
+```
+**FREE
+Ctl-Opt DFTACTGRP(*No);
+
+Dcl-S gMyVar Char(10);
+
+MyProc();
+
+*InLR = *On;
+Return;
+
+Dcl-Proc MyProc;
+  Dcl-S lMyVar Char(10);
+
+  gMyVar = 'Hello';
+  lMyVar = 'World';
+END-PROC;    
+```
+
+# RPG data-types
+
+RPG consists of lots of data-types, in this lecture we’re going to cover a few of them. You declare variables with the ‘Dcl-S’ operation, followed by the name, type and then optional keywords.
+
+```
+Dcl-S name type [keywords]
+```
+
+Here are some of the types we’re going to use in our lectures:
+
+//Table

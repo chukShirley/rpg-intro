@@ -1,6 +1,13 @@
 # rpg-intro
 Introduction to RPG
 
+## Todo
+
+* Prototypes
+* Modules and programs
+* Creating commands for programs
+* Embedded SQL basics
+
 ## Contents
 
 1. IBM i file system and the IFS

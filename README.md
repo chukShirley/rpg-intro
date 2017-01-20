@@ -419,12 +419,14 @@ Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE
 
 ## RPG Prototypes
 
-In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure/program interface).
+In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure/program interface). 
 
-Program interfaces can: 
+You can (http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm)[read more here] for more info.
 
-* Have pass by reference parameters only.
-* The value after `Dcl-PI` must be the program name.
+In general, program interfaces can: 
+
+* Have pass by reference and const parameters.
+* The value after `Dcl-PI` should be the program name.
 
 
 ```

@@ -8,7 +8,9 @@ Introduction to RPG
 3. Creating your first RPG program.
 4. RPG Syntax
 5. RPG data-types
-
+6. RPG Procedures
+7. RPG subroutines
+8. RPG data-structures
 
 ## IBM i file system and the IFS 
 

@@ -494,4 +494,4 @@ Dcl-PR myPgm ExtPgm('XMPLE1');
 End-PR;
 ```
 
-You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeprototype.htm] for info on procedure prototype declaration.
+You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeprototype.htm) for info on procedure prototype declaration.

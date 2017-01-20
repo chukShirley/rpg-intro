@@ -3,7 +3,6 @@ Introduction to RPG
 
 ## Todo
 
-* Prototypes
 * Modules and programs
 * Creating commands for programs
 * Embedded SQL basics
@@ -18,6 +17,7 @@ Introduction to RPG
 6. RPG Procedures
 7. RPG subroutines
 8. RPG data-structures
+9. RPG prototypes
 
 ## IBM i file system and the IFS 
 

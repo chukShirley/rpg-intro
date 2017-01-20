@@ -99,7 +99,7 @@ If 2 > 1;
 ENDIF; 
 ```
 
-Variables are case-insensitive and cannot start with numeric digits (but can contain them). Variables must be defined at the top of your program/procedure It is good practice to start variables in the global scope with a lowercase ‘g’ – variables in a local scope to start with a lowercase ‘l’.
+Variables are case-insensitive and cannot start with numeric digits (but can contain them). Variables must be defined at the top of your program/procedure It is good practice to start variables in the global scope with a lowercase 'g' – variables in a local scope to start with a lowercase 'l'.
 
 ```
 **FREE
@@ -120,7 +120,7 @@ Dcl-Proc MyProc;
 END-PROC;    
 ```
 
-# RPG data-types
+## RPG data-types
 
 RPG consists of lots of data-types, in this lecture we’re going to cover a few of them. You declare variables with the ‘Dcl-S’ operation, followed by the name, type and then optional keywords.
 
@@ -131,3 +131,270 @@ Dcl-S name type [keywords]
 Here are some of the types we’re going to use in our lectures:
 
 ![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table4.PNG)
+
+When you use character fields in expressions, it will always trim the right blanks from the variable. For example:
+
+```
+Dcl-S lMyVarA Char(20)  Inz('Hello!');
+Dcl-S lMyVarB Char(100) Inz('Hello!'); 
+
+If (lMyVarA = lMyVarB); 
+  Dsply 'True';
+ENDIF;
+```
+
+Is actually computed as:
+
+```
+If (%TrimR(lMyVarA) = %TrimR(lMyVarB));
+  Dsply 'True';
+ENDIF;  
+```
+
+RPG provides lots of keywords when declaring both variables and data-structures (more on data-structures in a future Lecture). One of those is `DIM` (dimensions), which can be used on both `Dcl-S` and `Dcl-Ds`. The `DIM` keyword allows you declare arrays, where the length is specified in the ‘DIM’ keyword. You can reference array elements the same way you would call a procedure.
+
+```
+Ctl-Opt DftActGrp(*No);
+
+Dcl-S MyArray Char(10) Dim(10);
+
+MyArray(1) = 'Value1';
+MyArray(5) = 'Value5';
+```
+
+Arrays indexes in RPG always start at 1. Whenever you’re referencing the length of an array, never use a hardcoded constant, instead use the ‘%Elem’ built-in function (elements). In this example, we will use this built-in function to clear every element in the array.
+
+```
+Dcl-S index   Int(3);
+Dcl-S MyArray Char(10) Dim(10);
+
+MyArray(1) = 'Value1';
+MyArray(5) = 'Value5';
+
+For index = 1 to %Elem(MyArray);
+  MyArray(index) = *Blank;
+ENDFOR;
+```
+
+While this code is valid and working, there is an easier option to clearing fields, arrays and data-structures. Instead of using this `FOR` loop to clear the, we can use the `CLEAR` operation code. The `CLEAR` operation code works on all fields, arrays, and data-structures (and subfields) – for every type too:
+
+```
+Dcl-S index   Int(3);
+Dcl-S MyArray Char(10) Dim(10);
+
+MyArray(1) = 'Value1';
+MyArray(5) = 'Value5';
+
+Clear MyArray;
+```
+
+Another useful keyword is `INZ` (initialization, US spelling). This allows the developer to give variables an initial value when they are declared. You would have already seen this used in this Lecture and will in future lectures too. If you use ‘INZ’ with ‘DIM’, it will give every element that initial value. There is a handy extra operation code, called `RESET`. `RESET` allows you to reset fields, arrays, and data-structure subfields back to their initial value (defined with the ‘INZ’ keyword):
+
+```
+Dcl-S index   Int(3);
+Dcl-S MyArray Char(10) Dim(10) Inz('Value');
+
+MyArray(1) = 'Nothing!';
+MyArray(5) = 'Nothing!';
+
+Reset MyArray;
+```
+
+## RPG Procedures
+
+Procedures in RPG are very comparable to functions in C. If you studied Lecture 5, you would have already seen an example of a basic procedure in RPG.
+
+Procedures can:
+
+* Have a return type (or void)
+* Have a parameter list
+* Have parameter by refernece, constant or value
+
+The syntax of a procedure can be confusing at first, but after practice it will become much simpler.
+
+```
+dcl-proc name [export];
+  [dcl-pr *N [returntype] [end-pi];]
+    [parmname parmtype passby;]
+  [end-pi;]
+end-proc;
+```
+
+`Dcl-Proc` stands for `declare procedure` and `Dcl-Pi` stands for `declare procedure-interface`. A PI is required for any procedure that has parameters or a return value. It’s used so the compiler knows how to invoke it correctly.
+
+### Procedure with no parameters or return value
+
+```
+**FREE
+Ctl-Opt DFTACTGRP(*No);
+
+Dcl-S gMyVar Char(20) Inz('Hello!');
+
+Dsply gMyVar;
+MyProc();
+Dsply gMyVar;
+
+*InLR = *On;
+Return;
+
+Dcl-Proc MyProc;
+  gMyVar = 'Goodbye!';
+END-PROC;
+```
+
+In this example, after MyProc() has been called – it will update the global variable to a different value. Notice how there is no PI because there are no parameters or return value.
+
+### Procedure with no parameters and return value
+
+```
+**FREE
+Ctl-Opt DFTACTGRP(*No);
+
+Dcl-S gMyVar Char(20) Inz('Hello!');
+
+Dsply gMyVar;
+gMyVar = MyProc();
+Dsply gMyVar;
+
+*InLR = *On;
+Return;
+
+Dcl-Proc MyProc;
+  Dcl-Pi *N Char(8) End-Pi;
+
+  Return 'Goodbye!';
+END-PROC;
+```
+
+In this example, calling MyProc() returns a Char(8) value and assigns it to gMyVar. Notice how the `Dcl-Pi` and `End-Pi` are on the same line because there are no parameters for this procedure. `*N` represents nothing/blank. You are able to replace it with the procedure name, but it is not required.
+
+### Procedure with a parameter and return value.
+
+```
+**FREE
+Ctl-Opt DFTACTGRP(*No);
+
+Dcl-S gMyVar Char(20) Inz('Hello!');
+
+Dsply gMyVar;
+gMyVar = MyProc('Goodbye');
+Dsply gMyVar;
+
+*InLR = *On;
+Return;
+
+Dcl-Proc MyProc;
+  Dcl-Pi *N Char(8);
+    pValue Char(20) Const;
+  END-PI;
+
+  Return %Trim(pValue) + '!';
+END-PROC;
+```
+
+In this example, we call MyProc() with a parameter and returns my parameter with an exclamation mark concatenated on the end. We use the ‘const’ option here so we can pass in a constant value (or expression). Notice that ‘End-Pi’ is after the parameter definition.
+
+## RPG subroutines
+
+A subroutine is a block of code that can be executed in the current scope and has access to all variables in the current and global scope. Variables cannot be defined in a subroutine and subroutines must be defined after the return point of your program/procedure. Mainlines can only access subroutines within the global scope and procedures can only access subroutines in the local scope (of that procedure).
+
+The following operations are used for subroutines:
+
+![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table5.PNG)
+
+```
+**FREE
+
+Ctl-Opt DftActGrp(*No);
+
+Dcl-S gMyGlobal Int(3);
+
+gMyGlobal = 0;
+Dsply ('Program start.');
+Exsr GlobalSub;
+MyProc();
+Dsply ('Program end: ' + %Char(gMyGlobal));
+
+*InLR = *On;
+Return;
+
+Begsr GlobalSub;
+  Dsply ('Entered subroutine.');
+  gMyGlobal += 1;
+  Dsply ('End of subroutine.');
+ENDSR;
+
+Dcl-Proc MyProc;
+  Dcl-S lMyLocal Int(3);
+
+  lMyLocal = 0;
+  Dsply ('Entered my procedure.');
+  Exsr LocalSub;
+  Dsply ('End of my procedure.');
+
+  Return;
+
+  Begsr LocalSub;
+    Dsply ('Entered local subroutine.');
+    lMyLocal  += 1;
+    gMyGlobal += 1;
+    Dsply ('End of local subroutine.');
+  ENDSR;
+END-PROC;                      
+```
+
+## RPG data-structures
+
+Simply put, data-structures (a DS) in RPG are a set of fields that are grouped together (even in memory). Data-structures contain subfields which can be of any type and they can also contain sub-data-structures (A DS, within a DS). When declaring subfields, you can use any of the keywords you’d use when declaring a regular field (e.g `INZ`, `DIM`).
+
+```
+dcl-ds name [keywords];
+  subfield type [keywords];
+  …
+end-ds;
+```
+
+```
+//Non-qualified DS
+Dcl-Ds MyDS;
+  SubfieldA Char(10);
+  SubfieldB Int(10);
+  SubfieldC Packed(11:2);
+END-DS;
+
+SubfieldA = 'Subfield';
+SubfieldB = 1337;
+SubfieldC = 363424.75;
+```
+
+It is important to know what a qualified DS and non-qualified DS is. Qualified simply means that when you reference it, you must append the data-structure name to the left. For example, let’s make the previous DS example qualified.
+
+```
+Dcl-Ds MyDS Qualified;
+  SubfieldA Char(10);
+  SubfieldB Int(10);
+  SubfieldC Packed(11:2);
+END-DS;
+
+MyDS.SubfieldA = 'Subfield';
+MyDS.SubfieldB = 1337;
+MyDS.SubfieldC = 363424.75;
+```
+
+Data-structure templating is a useful thing to know if you like to write clean code. A DS template is a data-structure that is not defined at runtime, but is known to the compiler so you can copy it’s subfields into another data-structure.
+
+```
+Dcl-Ds MyDS_Temp Template Qualified;
+  SubfieldA Char(10);
+  SubfieldB Int(10);
+  SubfieldC Packed(11:2);
+END-DS;
+
+Dcl-Ds MyRealDS  LikeDS(MyDS_Temp);
+Dcl-Ds MyOtherDS LikeDS(MyDS_Temp);
+
+MyRealDS.SubfieldB  = 1337;
+MyOtherDS.SubfieldB = 1337;
+```
+
+Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE` keyword – you can use it on any data-structure.

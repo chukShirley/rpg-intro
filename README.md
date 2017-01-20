@@ -421,7 +421,7 @@ Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE
 
 In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure/program interface). 
 
-You can (http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm)[read more here] for more info.
+You can [http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm](read more here) for more info.
 
 In general, program interfaces can: 
 

@@ -18,6 +18,7 @@ Introduction to RPG
 7. RPG subroutines
 8. RPG data-structures
 9. RPG prototypes
+10. RPG modules and prograns
 
 ## IBM i file system and the IFS 
 
@@ -495,3 +496,88 @@ End-PR;
 ```
 
 You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeprototype.htm) for info on procedure prototype declaration.
+
+## RPG modules
+
+In this section we will use three new commands, CRTRPGMOD, CRTSQLRPGI and CRTPGM:
+
+* CRTRPGMOD is used to create a module object. Modules can contain procedures or can be used as an entry point for programs.
+* CRTSQLRPGI can be used to create both RPG modules and programs. We will use it to create a module in this section.
+* CRTPGM is used to package modules together to make a program object.
+
+Modules should be used to make modular and reusable code. Normally, procedures in modules are created with the EXPORT keyword. The EXPORT keyword means it can be referenced by other modules within the program it is part of. If your module is just a set of 'exported' procedures, it should use the NOMAIN program-header which you will see next.
+
+For example, this module wraps two embedded SQL statements into procedures; let's call this module MATHMOD.
+
+```
+**FREE
+
+Ctl-Opt NoMain;
+
+Dcl-Proc Math_Pow Export;
+  Dcl-Pi *N Int(10);
+    pNumA Int(10) const;
+    pNumB Int(10) const;
+  End-pi;
+
+  Dcl-S lResult Int(10);
+  EXEC SQL SET :lResult = POWER(:pNumA, :pNumB);
+  Return lResult;
+End-Proc;
+
+Dcl-proc Math_Cos Export;
+  Dcl-pi *N Packed(11:8);
+    pNum Int(10) Const;
+  End-pi;
+
+  Dcl-S lResult Packed(11:8);
+  EXEC SQL SET :lResult = COS(:pNum);
+  Return lResult;
+End-proc;
+```
+
+To compile this, we can use CRTSQLRPGI with option `OBJTYPE(*MODULE)` so that a module is created. CRTSQLRPGI is similar to CRTBNDRPG and CRTRPGMOD, but we will talk more about that later.
+
+NOMAIN is used to indicate that this module has no mainline and that there is no entry point. The other two procedures have the EXPORT keyword to indicate that they can be referenced by other modules.
+
+To reference them, we must declare their procedure prototypes in all the modules we want to call them from. In the next example, we will create the entry module. This module will be the mainline entry point for the program object when it is called; let's call this module MYPGM.
+
+```
+**FREE
+
+Dcl-pr Math_Pow Int(10) ExtProc('MATH_POW');
+  pNumA Int(10) const;
+  pNumB Int(10) const;
+End-pr;
+
+Dcl-pr Math_Cos Packed(11:8) ExtProc('MATH_COS');
+  pNum Int(10) Const;
+End-Pr;
+
+Dcl-s MyPow Int(10);
+Dcl-s MyCos Packed(11:8);
+
+MyPow = math_pow(5:6);
+MyCos = math_cos(12);
+
+*InLR = *on;
+Return;
+```
+
+To compile this, we can simply use CRTRPGMOD since there is no embedded SQL. 
+
+Now that we have both modules, we can use CRTPGM. Notice how the first module on my module list is the entry module - you are also able to manually specify the entry module. I am going to call the program MYPGM.
+
+```
+CRTPGM PGM(MYLIB/MYPGM) MODULE(MYLIB/MYPGM MYLIB/MATHMOD)
+```
+
+After you have created the program, you should be able to call the program like any other:
+
+```
+CALL MYPGM
+```
+
+This really should give a brief idea of how modules can be used. You may have an order entry program, where the entry module does all the display file handling, another module might do the order entry processing and another might send data to a web service.
+
+Know that you can includes modules written in any ILE language when creating programs.

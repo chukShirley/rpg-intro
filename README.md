@@ -232,7 +232,7 @@ The syntax of a procedure can be confusing at first, but after practice it will 
 
 ```
 dcl-proc name [export];
-  [dcl-pr *N [returntype] [end-pi];]
+  [dcl-pi *N [returntype] [end-pi];]
     [parmname parmtype passby;]
   [end-pi;]
 end-proc;
@@ -454,3 +454,10 @@ There are two types of prototypes:
   * Reference to procedures in service programs within the specified binding directory
   * Reference to APIs provided by the operating system (`printf` or `system` for example)
 
+The syntax is as follows
+
+```
+dcl-pr name [returntype] extpgm/extproc[()] [end-pi];
+  parmname parmtype passby;
+end-pr;
+```

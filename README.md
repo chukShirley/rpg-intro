@@ -448,9 +448,9 @@ Next we must learn about prototypes. A prototype is used so the compiler knows h
 There are two types of prototypes:
 
 * Program prototypes, which uses keyword `EXTPGM`
-* * Reference to external program objects
+  * Reference to external program objects
 * Procedure prototypes, which uses keyword `EXTPROC`
-* * Reference to procedures in different modules within the current program
-* * Reference to procedures in service programs within the specified binding directory
-* * Reference to APIs provided by the operating system (`printf` or `system` for example)
+  * Reference to procedures in different modules within the current program
+  * Reference to procedures in service programs within the specified binding directory
+  * Reference to APIs provided by the operating system (`printf` or `system` for example)
 

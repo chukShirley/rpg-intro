@@ -29,15 +29,15 @@ The reason we minus 12 is because the first 12 bytes are used for the line seque
 ## IBM i commands 
 Commands on IBM i are the simplest form of commands ever invented. Commands are a maximum of 10 characters long (because they’re an object) and are made up of word abbreviations. For example:
 
-//Table 1
+![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table1.PNG)
 
 Concatenating the abbreviations can make up commands, which are also pronounceable:
 
-//Table 2
+![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table2.PNG)
 
 Some of the commands we’ll be using throughout the lectures are the following:
 
-//Table 3
+![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table3.PNG)
 
 When using commands on the IBM i, if you are unsure of the parameters you are able to prompt the command. You can prompt after you have entered the command and then pressed F4. This will bring up a list of parameters available for a command. You may also have the option to use F10, which will show more available parameters. 
 
@@ -130,4 +130,4 @@ Dcl-S name type [keywords]
 
 Here are some of the types we’re going to use in our lectures:
 
-//Table
+![](https://raw.githubusercontent.com/WorksOfBarry/rpg-intro/master/assets/table4.PNG)

@@ -93,6 +93,8 @@ CRTBNDRPG does allow you to compile both stream files and source members.
 
 Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compild.
 
+You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/cl/crtbndrpg.htm] for info on CRTBNDPGM.
+
 You are now going to call your program using `CALL <programname>`, which should then display ‘Hello world’ on your terminal. 
 
 ## RPG Syntax
@@ -421,7 +423,7 @@ Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE
 
 In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure interface). 
 
-You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm] for more info on procedure interface declaration.
+You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm] for info on procedure interface declaration.
 
 In general, procedure interfaces for programs can: 
 
@@ -437,11 +439,13 @@ Dcl-Pi XMPLE1;
   pName Char(10)
 End-Pi;
 
-Dsply pNams;
+Dsply pName;
 
 *InLR = *On;
 Return;
 ```
+
+### Prototyping
 
 Next we must learn about prototypes. A prototype is used so the compiler knows how to map the parameters of other procedures and programs so we can call them.
 
@@ -461,3 +465,33 @@ dcl-pr name [returntype] extpgm/extproc[()] [end-pi];
   parmname parmtype passby;
 end-pr;
 ```
+
+Each parameter much match to that of the program, procedure or API you are referencing. The following example is a program with a prototype for the program shown at the beginning of this chapter:
+
+```
+**FREE
+
+Dcl-PR XMPLE1 ExtPgm;
+  Name Char(10);
+End-PR;
+
+Dcl-S myName Char(10);
+
+myName = 'Barry';
+
+//Call your program like a procedure
+XMPLE1(myName);
+
+*InLR = *On;
+Return;
+```
+
+Note that if the external program, procedure or API name is different from your prototype name: you will have to pass a parameter to `EXTPGM`/`EXTPROC` to specify the real name of what youre trying to call. For example:
+
+```
+Dcl-PR myPgm ExtPgm('XMPLE1');
+  Name Char(10);
+End-PR;
+```
+
+You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeprototype.htm] for info on procedure prototype declaration.

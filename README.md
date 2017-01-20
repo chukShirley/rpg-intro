@@ -238,7 +238,7 @@ dcl-proc name [export];
 end-proc;
 ```
 
-`Dcl-Proc` stands for `declare procedure` and `Dcl-Pi` stands for `declare procedure-interface`. A PI is required for any procedure that has parameters or a return value. It’s used so the compiler knows how to invoke it correctly.
+`Dcl-Proc` stands for `declare procedure` and `Dcl-Pi` stands for `declare procedure-interface`. A PI is required for any procedure or program that has parameters or a return value. It’s used so the compiler knows how to invoke it correctly.
 
 ### Procedure with no parameters or return value
 
@@ -419,14 +419,15 @@ Note that you do not have to use `LIKEDS` on a data-structure with the `TEMPLATE
 
 ## RPG Prototypes
 
-In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure/program interface). 
+In RPG, each program and procedure can have an interface. We learned about procedure interfaces in a previous chapter, but we didn't learn that programs can also have a PI (procedure interface). 
 
-You can (http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm)[read more here] for more info.
+You can (read more here)[http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzasd/freeinterface.htm] for more info on procedure interface declaration.
 
-In general, program interfaces can: 
+In general, procedure interfaces for programs can: 
 
 * Have pass by reference and const parameters.
 * The value after `Dcl-PI` should be the program name.
+* Cannot have a return value.
 
 
 ```
@@ -441,3 +442,15 @@ Dsply pNams;
 *InLR = *On;
 Return;
 ```
+
+Next we must learn about prototypes. A prototype is used so the compiler knows how to map the parameters of other procedures and programs so we can call them.
+
+There are two types of prototypes:
+
+* Program prototypes, which uses keyword `EXTPGM`
+* * Reference to external program objects
+* Procedure prototypes, which uses keyword `EXTPROC`
+* * Reference to procedures in different modules within the current program
+* * Reference to procedures in service programs within the specified binding directory
+* * Reference to APIs provided by the operating system (`printf` or `system` for example)
+

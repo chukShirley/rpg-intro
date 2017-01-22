@@ -1,4 +1,5 @@
 # rpg-intro
+
 Introduction to RPG
 
 ## Todo
@@ -17,7 +18,7 @@ Introduction to RPG
 7. RPG subroutines
 8. RPG data-structures
 9. RPG prototypes
-10. RPG modules and prograns
+10. RPG modules and programs
 
 ## IBM i file system and the IFS 
 
@@ -63,7 +64,7 @@ First, we will need to do the following steps:
 2. Create a source physical file (`CRTSRCPF`)
 3. Create a source member (`ADDPFM`)
 
-You may also do this within Rational Developer for i, but it’s very useful to memorize these commands for when you don’t have the IDE.
+You may also do this within Rational Developer for i, but it’s very useful to memorise these commands for when you don’t have the IDE.
 
 It is possible to write all your RPG code in stream files on the IFS. The easiest way to create a stream file is with Rational Developer for i.
 
@@ -91,7 +92,7 @@ CRTBNDRPG does allow you to compile both stream files and source members.
 * To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCFILE(MYLIB/QRPGLESRC) SRCMBR(XMPLE1) TEXT('My RPG IV Program')`
 * To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple1.rpgle') TEXT('My RPG IV Program')`
 
-Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compild.
+Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compile.
 
 You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/cl/crtbndrpg.htm) for info on CRTBNDPGM.
 
@@ -228,7 +229,7 @@ Procedures can:
 
 * Have a return type (or void)
 * Have a parameter list
-* Have parameter by refernece, constant or value
+* Have parameter by reference, constant or value
 
 The syntax of a procedure can be confusing at first, but after practice it will become much simpler.
 

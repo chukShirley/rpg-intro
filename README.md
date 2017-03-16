@@ -90,7 +90,7 @@ Once we have written our code, we are going to use CRTBNDRPG to create our progr
 CRTBNDRPG does allow you to compile both stream files and source members.
 
 * To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCFILE(MYLIB/QRPGLESRC) SRCMBR(XMPLE1) TEXT('My RPG IV Program')`
-* To compile a source member: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple1.rpgle') TEXT('My RPG IV Program')`
+* To compile a stream file: `CRTBNDRPG PGM(MYLIB/XMPLE1) SRCSTMF('xmple1.rpgle') TEXT('My RPG IV Program')`
 
 Note that when you compile a stream file, the SRCSTMF path should be relative to your current directory when running the compile.
 

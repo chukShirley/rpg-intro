@@ -84,7 +84,8 @@ Dsply lText;
 *InLR = *On; 
 Return;  
 ```
-
+**Note: You must be running OS version 7.2 at TR 11 or 7.3 at TR 3. You can look up your system's TR level using the approach described in [this post](http://www.seidengroup.com/2014/08/16/find-technology-refresh-tr-level-ibm-i).
+ 
 Once we have written our code, we are going to use CRTBNDRPG to create our program object. What makes CRTBNDPGM useful is that it just creates a program object – it’s automating the CRTRPGMOD step. Another way we could have created our program object is by using CRTRPGMOD and then CRTPGM over that module. 
 
 CRTBNDRPG does allow you to compile both stream files and source members.

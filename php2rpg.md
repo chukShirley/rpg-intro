@@ -12,7 +12,7 @@ Guide showing you PHP and RPG differences
 * RPG does not have strings like PHP. RPG has character fields, which consists of a block of memory. When you refernece the field, it will return every character that was allocated for it - including blanks.
 * There are more types than shown here.
 
-```
+```php
 $x = "Hello world!"; //String
 $y = 5985;           //Int
 $z = 10.365;         //Float
@@ -49,7 +49,7 @@ Dcl-S a Ind      Inz(*On);
 ***
 
 ### Create different variables
-```
+```php
 $txt = "Hello world!";
 $x = 5;
 $y = 10.5;
@@ -74,7 +74,7 @@ DSPLY %Char(y);
 ***
 
 ### Arithmetic operators
-```
+```php
 echo 5 + 5;
 echo 5 - 5;
 echo 5 / 5;
@@ -100,7 +100,7 @@ dsply %char(Result);
 ***
 
 ### Assignment operators
-```
+```php
 $x = 10; 
 $x += 10;
 $x -= 10;
@@ -126,8 +126,7 @@ Result *= 10;
 * Booleans are called Indicators in RPG
   * They are either *On or *Off (the same are true or false)
 
-```
-
+```php
 $varA = 5;
 %varB = 10;
 
@@ -156,7 +155,7 @@ bool = (varA <= varB);
 ***
 
 ### Logical operators
-```
+```php
 If ($bool == true && $varA == 5) {
   echo('Hello world.');
 ]
@@ -188,7 +187,7 @@ Endif;
 
 ### Arrays
 
-```
+```php
 $MyArray = [];
 $MyArray[0] = 'Hello';
 $MyArray[1] = 'World';
@@ -214,7 +213,7 @@ dsply (MyArray(3));
 ***
 
 ### While loop
-```
+```php
 $num = 0;
 
 while ($num < 5) {
@@ -235,7 +234,7 @@ Enddo;
 ***
 
 ### For loop (Counting up example)
-```
+```php
 for ($x = 0; $x <= 10; $x++) {
     echo "The number is: " . $x;
 }
@@ -252,7 +251,7 @@ Endfor;
 ***
 
 ### For loop (Counting down example)
-```
+```php
 for ($x = 10; $x >= 0; $x--) {
     echo "The number is: " . $x;
 }
@@ -273,7 +272,7 @@ Endfor;
 * This example prints 0, 2, 4, 6, 8, 10
 * The RPG `for` is also writable as `For x = 0 to 10 by 2`.
 
-```
+```php
 for ($x = 0; $x <= 10; $x += 2) {
     echo "The number is: " . $x;
 }
@@ -293,7 +292,7 @@ Endfor;
 * RPG passes by reference by default, but will pass by value with the `value` keyword.
 * `*N` in RPG represents 'nothing' - you can optionally put the procedure name (`doDivide`) in its place.
 
-```
+```php
 echo doDivide(10, 2);
 return;
 
@@ -321,7 +320,7 @@ Edn-Proc;
 
 ### Test global scope (variable in global scope)
 
-```
+```php
 $x = 5; // global scope
   
 function myTest() {
@@ -353,7 +352,7 @@ End-Proc;
 ### Test local scope (variable inside function)
 * This is a false program (won't compile) and script: using `x` outside the function/procedure will stop the compiler/script because x doesn't exist in the global scope.  
 
-```
+```php
 function myTest() {
      $x = 5; // local scope
      echo "<p>Variable x inside function is: $x</p>";
@@ -381,7 +380,7 @@ End-Proc;
 ***
 
 ### Get the length of a string - %len / %trim
-```
+```php
 echo strlen("Hello world!");
 ```
 
@@ -402,7 +401,7 @@ dsply %char(%len('Hello world!'));
 
 * Both `strpos` and `%scan` return the starting index of the string.
 
-```
+```php
 echo strpos("Hello world!", "world");
 ```
 
@@ -413,7 +412,7 @@ dsply %char(%scan('world':'Hello world!'));
 ***
 
 ### Replace text within a string - %scanrpl
-```
+```php
 echo str_replace("world", "Barry", "Hello world!");
 ```
 

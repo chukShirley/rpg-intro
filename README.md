@@ -96,7 +96,7 @@ Note that when you compile a stream file, the SRCSTMF path should be relative to
 
 You can [read more here](http://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/cl/crtbndrpg.htm) for info on CRTBNDPGM.
 
-You are now going to call your program using `CALL <programname>`, which should then display ‘Hello world’ on your terminal. 
+You are now going to call your program using `CALL <programname>`, which should then display ‘Hello world’ on your terminal. If you only see the output flash on your screen then run `WRKMBRPDM` before calling your program.
 
 ## RPG Syntax
 

@@ -122,7 +122,7 @@ Result *= 10;
 
 ### Comparison operators
 
-* Booleans in PHP are either true of false
+* Booleans in PHP are either true or false
 * Booleans are called Indicators in RPG
   * They are either *On or *Off (the same are true or false)
 
